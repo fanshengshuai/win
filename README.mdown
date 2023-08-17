@@ -12,6 +12,11 @@ fork from https://github.com/lxn/win.
 
     win.ShowWindow(hwnd, win.SW_HIDE)
     win.ShowWindow(hwnd, win.SW_SHOW)
+    win.HideWindow(hwnd)
+
+    win.MessageBox(hwnd, "大家好，我是等风来。", "Golang 窗口测试", win.MB_OK)
+
+
 
     win.CloseWindow(hwnd)
 

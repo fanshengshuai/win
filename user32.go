@@ -3017,11 +3017,11 @@ func MessageBeep(uType uint32) bool {
 	return ret != 0
 }
 
-func MessageBox(hWnd HWND, lpText, lpCaption *uint16, uType uint32) int32 {
+func MessageBox(hWnd HWND, lpText, lpCaption string, uType uint32) int32 {
 	ret, _, _ := syscall.Syscall6(messageBox.Addr(), 4,
 		uintptr(hWnd),
-		uintptr(unsafe.Pointer(lpText)),
-		uintptr(unsafe.Pointer(lpCaption)),
+		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(lpText))),
+		uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(lpCaption))),
 		uintptr(uType),
 		0,
 		0)
@@ -3558,9 +3558,9 @@ func WindowFromPoint(Point POINT) HWND {
 }
 
 func CloseWindow(hwnd HWND) {
-	win.SendMessage(hwnd, win.WM_CLOSE, 0, 0)
+	SendMessage(hwnd, WM_CLOSE, 0, 0)
 }
 
 func HideWindow(hwnd HWND) {
-	win.SendMessage(hwnd, win.WM_HIDE, 0, 0)
+	ShowWindow(hwnd, SW_HIDE)
 }

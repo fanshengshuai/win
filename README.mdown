@@ -7,8 +7,8 @@ fork from https://github.com/lxn/win.
 
     hwnd := win.FindWindow("#32770", "窗口标题")
 
-		className := win.GetClassName(hwnd)
-		winTitle := win.GetWindowText(hwnd)
+    className := win.GetClassName(hwnd)
+    winTitle := win.GetWindowText(hwnd)
 
     win.ShowWindow(hwnd, win.SW_HIDE)
     win.ShowWindow(hwnd, win.SW_SHOW)
@@ -16,17 +16,17 @@ fork from https://github.com/lxn/win.
     win.CloseWindow(hwnd)
 
     // 查找所有窗口
-		aa := win.FindAllWindows()
+    aa := win.FindAllWindows()
 
-		for _, hwnd := range aa {
+    for _, hwnd := range aa {
       // GetWindowText 返回 string
-			fmt.Println(win.GetWindowText(hwnd))
-		}
+      fmt.Println(win.GetWindowText(hwnd))
+    }
 
     // 为Edit填充内容
     if className == "Edit" {
-			win.SendMessage(hwnd, win.WM_SETTEXT, uintptr(unsafe.Pointer(nil)), uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("等风来"))))
-		}
+      win.SendMessage(hwnd, win.WM_SETTEXT, uintptr(unsafe.Pointer(nil)), uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("等风来"))))
+    }
 
     // 按钮点击
     win.SendMessage(win.HWND(hwnd_btn), win.WM_LBUTTONDOWN, uintptr(unsafe.Pointer(nil)), uintptr(unsafe.Pointer(nil)))
